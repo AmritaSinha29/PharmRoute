@@ -43,6 +43,8 @@ Typical pharma exporters use manual packing lists that gloss over APIs and lack 
 - **Time**: Hackathon timeline (3 weeks) — MVP must cleanly execute an edge-case disruption demo within 8 minutes.
 - **Tech Stack**: Must heavily leverage Google's AI capabilities (Gemini, text-embedding, Cloud Run, Search Grounding) to meet evaluation criteria.
 - **Reliability**: Generative AI cannot hallucinate regulatory facts; it must be grounded in exact-match chemical lookups and authoritative DBs.
+- **UX**: Long-running document parsing must use asynchronous operations and loading states to unblock the frontend.
+- **Security**: Must enforce zero training-data retention and strict data privacy rules for handling BMRs.
 - **Scope**: Build only P0 features (Manifest Engine, Compliance Dashboard, Route Scoring, Disruption Detection, Demo Scenario).
 
 ## Key Decisions
@@ -52,6 +54,8 @@ Typical pharma exporters use manual packing lists that gloss over APIs and lack 
 | Exclude physical IoT in demo | De-risk hardware failure during an 8-min presentation | — Pending |
 | Use exact-match lookup for substance matching | Prevent LLM hallucination of regulatory facts | — Pending |
 | Limit MVP to India-EU and India-US corridors | Focus on highest-value, strictest compliance regions for maximum impact | — Pending |
+| Implement Human-in-the-Loop before export | Require user to explicitly confirm LLM extraction before finalizing the packing list, ensuring manual safety checks | — Pending |
+| Hybrid AI/Deterministic compliance pipeline | Use LLM only for structured JSON extraction; ensure backend handles deterministic compliance rules independently | — Pending |
 
 ---
 *Last updated: 2026-04-11 after initialization*

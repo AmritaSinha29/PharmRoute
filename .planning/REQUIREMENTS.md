@@ -9,11 +9,14 @@
 - [ ] **MAN-01**: User can upload batch manufacturing record PDFs
 - [ ] **MAN-02**: System extracts APIs, excipients, and controlled substances accurately
 - [ ] **MAN-03**: System generates destination-specific, ingredient-level packing lists including regulatory identifiers (e.g., EC numbers, FMD barcodes)
+- [ ] **MAN-04**: User must explicitly confirm LLM-extracted APIs via Human-in-the-Loop (HITL) before final export
+- [ ] **MAN-05**: UX relies on asynchronous background processing with a loading state to handle document parsing latency
 
 ### Compliance Checker
 - [ ] **CMP-01**: System checks product against destination country scheduling rules
 - [ ] **CMP-02**: System validates if specific buyer permits/licenses are required
 - [ ] **CMP-03**: Dashboard displays a traffic-light status with remediation guidance for failing checks
+- [ ] **CMP-04**: Hybrid pipeline: LLM extracts structured JSON mappings while the backend deterministic logic independently handles the compliance checks
 
 ### Route & Disruption Intelligence
 - [ ] **RTE-01**: System scores available transit routes based on time, cost, cold-chain persistence, and regulatory risk
@@ -36,6 +39,9 @@
 - **ERP-01**: Direct integration into SAP, Oracle, and Tally
 - **EXP-01**: Expand constraint layer to secondary markets like hazardous chemicals
 
+### Security & Data Privacy
+- [ ] **SEC-01**: Enforce zero training-data retention policy and strict privacy rules for all parsed Batch Manufacturing Records
+
 ## Out of Scope
 
 | Feature | Reason |
@@ -55,6 +61,10 @@
 | CMP-01 | Phase 1 | Pending |
 | CMP-02 | Phase 1 | Pending |
 | CMP-03 | Phase 1 | Pending |
+| CMP-04 | Phase 1 | Pending |
+| MAN-04 | Phase 1 | Pending |
+| MAN-05 | Phase 1 | Pending |
+| SEC-01 | Phase 1 | Pending |
 | RTE-01 | Phase 2 | Pending |
 | RTE-02 | Phase 2 | Pending |
 | RTE-03 | Phase 2 | Pending |
@@ -64,8 +74,8 @@
 | DEMO-03 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 13 total
-- Mapped to phases: 13
+- v1 requirements: 17 total
+- Mapped to phases: 17
 - Unmapped: 0 ✓
 
 ---
