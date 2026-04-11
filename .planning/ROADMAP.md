@@ -27,7 +27,7 @@ The journey to building PharmRoute for the Google Hackathon. We start by buildin
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Set up vector DB and FastAPI backend with Gemini extraction prompts
+- [x] 01-01: Set up vector DB and FastAPI backend with Gemini extraction prompts
 - [ ] 01-02: Build the compliance rule evaluation logic
 - [ ] 01-03: Implement the basic React frontend for file upload and status display
 
@@ -68,6 +68,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Compliance & Manifest Intelligence | 0/3 | Not started | - |
+| 1. Compliance & Manifest Intelligence | 1/3 | In Progress|  |
 | 2. Route Scoring & Disruption Engine | 0/3 | Not started | - |
 | 3. End-to-End Demo Integration | 0/3 | Not started | - |
