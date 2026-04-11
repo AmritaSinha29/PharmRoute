@@ -19,7 +19,7 @@ defmodule PharmRoute.Manifest.Substance do
   def changeset(substance, attrs) do
     substance
     |> cast(attrs, [:name, :cas_number, :inn_name, :ec_number, :dea_schedule, :cdsco_status, :is_controlled, :scheduling_notes])
-    |> validate_required([:name, :cas_number, :inn_name, :ec_number, :dea_schedule, :cdsco_status, :is_controlled])
+    |> validate_required([:name, :cas_number, :inn_name, :cdsco_status])
     |> unique_constraint(:cas_number)
   end
 end
