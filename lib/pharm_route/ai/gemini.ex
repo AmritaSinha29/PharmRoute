@@ -61,4 +61,54 @@ defmodule PharmRoute.AI.Gemini do
         {:error, inspect(exception)}
     end
   end
+
+  @doc """
+  Generate human-readable remediation advice for a failed compliance check.
+  Uses Gemini to produce contextual, actionable guidance based on the rule
+  and shipment context. Falls back to the rule's static template if the API
+  is unavailable.
+  """
+  def generate_remediation(rule, shipment_data) do
+    api_key = System.get_env("GEMINI_API_KEY")
+
+    if is_nil(api_key) do
+      {:ok, rule.remediation_template || "No remediation guidance available."}
+    else
+      prompt = """
+      You are a pharmaceutical regulatory compliance expert.
+      A shipment has FAILED the following compliance check:
+
+      Rule: #{rule.rule_name}
+      Description: #{rule.description}
+      Severity: #{rule.severity}
+      Country: #{rule.country_code}
+
+      Shipment context:
+      #{inspect(shipment_data)}
+
+      Based on the rule template below, generate a clear, actionable remediation plan
+      with specific steps, estimated timelines, and relevant regulatory references.
+      Keep it concise (max 200 words).
+
+      Template: #{rule.remediation_template}
+      """
+
+      payload = %{
+        "contents" => [%{"parts" => [%{"text" => prompt}]}],
+        "generationConfig" => %{"maxOutputTokens" => 300}
+      }
+
+      url = "#{@model_url}?key=#{api_key}"
+
+      case Req.post(url, json: payload, receive_timeout: 15_000) do
+        {:ok, %{status: 200, body: %{"candidates" => [%{"content" => %{"parts" => [%{"text" => text}]}} | _]}}} ->
+          {:ok, text}
+
+        _ ->
+          # Graceful fallback to static template
+          {:ok, rule.remediation_template || "No remediation guidance available."}
+      end
+    end
+  end
 end
+
