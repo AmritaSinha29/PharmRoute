@@ -1,0 +1,244 @@
+﻿PHARMROUTE
+Intelligent Pharma Export Platform
+Product Requirements Document
+  Smart Supply Chains Track
+Version
+1.0 — Initial Release
+Date
+April 2025
+Track
+Smart Supply Chains — Resilient Logistics & Dynamic Supply Chain Optimization
+Status
+Draft — Hackathon Submission
+Target Market
+Indian Pharmaceutical Exporters (Primary), Hazardous Chemical Exporters (Secondary)
+1. Executive Summary
+PharmRoute is an AI-powered export intelligence platform purpose-built for pharmaceutical companies exporting from India. It addresses the full lifecycle of a pharma shipment — from intelligent document generation and country-specific compliance validation, to real-time route optimization and proactive disruption detection.
+India is the world's largest supplier of generic medicines, accounting for roughly 20% of global generic drug exports by volume. Yet the export operations layer remains manual, fragmented, and dangerously compliance-blind. A single mislabelled substance in a packing list, an undisclosed active pharmaceutical ingredient, or a failed cold-chain handoff can result in shipment seizure, regulatory blacklisting, or the loss of a multi-crore contract.
+PharmRoute solves this by acting as a single intelligent workspace for the exporter, their CHA, freight forwarder, and overseas buyer — with an AI core that understands pharma-specific constraints including drug scheduling laws, controlled substance declarations, temperature band requirements, and import permit rules across 50+ markets.
+For the Google Hackathon, PharmRoute directly addresses the problem statement: designing a scalable system that continuously analyses multifaceted transit data, preemptively detects supply chain disruptions, and formulates dynamic route adjustments before localised bottlenecks cascade into broader delays — with the additional constraint that rerouting decisions must respect regulatory and cold-chain compliance, not just cost and transit time.
+1.1 The Core Insight
+Every existing logistics tool treats a pharma shipment like a box of electronics. PharmRoute treats it like what it actually is: a regulated medical product with a chain of custody that must be legally traceable from batch manufacturing record to import clearance. The intelligence difference is not in the routing algorithm — it is in the constraint layer that wraps around every routing decision.
+2. Problem Statement
+2.1 The Operational Reality
+A typical Indian pharma export shipment involves the following parties, all operating in silos:
+The exporting manufacturer (creates batch records, quality docs)
+The Customs House Agent — CHA (files shipping bill, handles DGFT)
+The freight forwarder (books vessel/aircraft, manages BL)
+The shipping line or airline
+The bank handling the Letter of Credit
+The overseas buyer's clearing agent
+Customs authorities at both origin and destination ports
+None of these parties share a common system. Documents are exchanged over email and WhatsApp as PDFs, regenerated multiple times by different parties, and reconciled manually. The result is a predictable chain of failures.
+2.2 Critical Problem Areas
+Problem 1: Undeclared box contents — the silent customs killer
+Packing lists in pharma exports routinely declare the product name (e.g., Amoxicillin 500mg Capsules) but omit the active pharmaceutical ingredient (API), excipients, binders, coatings, and controlled precursors inside. Countries such as the United States, members of the European Union, and Saudi Arabia require ingredient-level substance declarations under their controlled substance import regulations. A shipment that reaches port without these declarations is held, inspected, and often seized. The financial loss per incident ranges from INR 20 lakh to several crores, excluding the reputational damage with the buyer.
+Problem 2: Drug scheduling divergence across markets
+The same active molecule may be freely available over the counter in India, require a prescription in Nigeria, be a Schedule II controlled substance in the United States, and be entirely prohibited for import in a Gulf country under a different trade name. Exporters currently rely on the importer's agent to flag these issues — often discovering the mismatch only after the shipment is en route. There is no systematic pre-shipment check against destination-country scheduling databases.
+Problem 3: Static routing in a dynamic world
+Pharma exporters typically use the same forwarder and the same route for years. When disruptions occur — port congestion, vessel diversions, geopolitical events, weather — the exporter is informed reactively, often after the shipment has already been delayed. For temperature-sensitive biologics and vaccines, even a 24-hour unplanned delay at a non-GDP-certified transshipment hub can render the entire shipment unusable.
+Problem 4: Cold chain integrity gaps
+Reefer containers and temperature-controlled air cargo require pre-cooling, continuous data logging, and certified handling at every node. In practice, cold chain breaks most frequently at transshipment ports and destination last-mile handoffs — points where the exporter has zero visibility. By the time a temperature excursion is reported, the product has already been compromised.
+Problem 5: Regulatory change blindness
+Import regulations for pharmaceutical products change frequently and without broad announcement. In 2023 alone, several African markets imposed sudden new serialisation mandates, the EU Falsified Medicines Directive enforcement expanded, and multiple Gulf countries updated their approved drug registries. Exporters with active shipments to these markets had no early warning system. The information reached them through their local agent, often too late to repackage or reroute.
+3. Goals and Non-Goals
+3.1 Goals
+Eliminate customs rejection caused by documentation errors and undeclared substances
+Provide real-time, constraint-aware route optimisation that accounts for cold chain, regulatory compliance, and cost simultaneously
+Deliver proactive disruption detection with auto-generated rerouting recommendations before delays cascade
+Centralise all shipment stakeholders — exporter, CHA, forwarder, buyer — on a single document workspace
+Build a living regulatory intelligence layer that monitors rule changes across 50+ import markets and alerts exporters to impacts on active shipments
+Be demonstrably scalable to other regulated-goods sectors (hazardous chemicals, medical devices, food products)
+3.2 Non-Goals (for Hackathon Scope)
+Full ERP integration — the hackathon build will use file upload and manual data entry
+Real payments or Letter of Credit processing
+Physical IoT cold chain sensor integration — simulated data will be used for the demo
+Freight booking execution — the platform recommends routes but does not book them
+Multi-language localisation beyond English
+4. Target Users
+Export Manager
+Mid-to-large pharma company, responsible for end-to-end shipment coordination. Needs compliance confidence and route visibility without manual research.
+Regulatory Affairs Lead
+Ensures every shipment meets destination-country drug import rules. Currently relies on country agents and manual reference checks.
+CHA / Freight Agent
+Files customs documents and books cargo. Needs clean, validated inputs from the exporter to avoid discrepancies.
+Supply Chain Director
+Accountable for delivery SLAs and cost targets. Needs predictive disruption alerts and alternative scenario modelling.
+Overseas Buyer / Importer
+Needs assurance of compliant, on-time delivery. Currently has no real-time visibility into the shipment status or document completeness.
+5. Solution Overview
+PharmRoute is structured around six interconnected modules, all powered by a central AI intelligence core. Each module addresses a specific failure mode identified in Section 2.
+5.1 Module Architecture
+Module 1 — Intelligent Box Manifest Engine
+This is the core differentiator. The exporter uploads their batch manufacturing record or enters product details. The engine parses the ingredients, APIs, excipients, and controlled substances, then generates a country-specific ingredient-level packing list that satisfies the import declaration requirements of the destination market. For a shipment to the US, it maps against DEA Schedule lists and FDA import alerts. For the EU, it cross-references EC Annex II and the EMVS serialisation requirements. The output is a validated packing list that cannot cause a substance-declaration rejection.
+Module 2 — Compliance Checker
+Before a shipping bill is filed, the compliance checker validates the product-country-quantity combination against a continuously updated database of import rules. It checks drug scheduling status at the destination, whether an import drug license or end-user certificate is required, whether any ingredients are subject to quota or prohibition, and whether the labelling meets local-language and barcode requirements. Results are presented as a traffic-light dashboard with specific remediation instructions for each flag.
+Module 3 — Route & Disruption Intelligence Engine
+This module directly addresses the hackathon problem statement. It ingests live transit data — vessel positions, port congestion indices, weather forecasts, geopolitical alerts, and air cargo capacity feeds — and scores available routes on four dimensions: transit time, cost, cold chain capability, and regulatory risk. When an active shipment is disrupted, the engine detects the anomaly, scores alternative routes against the same four dimensions, and generates a rerouting recommendation with updated documentation in under two minutes. The constraint layer ensures that no route recommendation violates the product's temperature band requirement or the destination's import channel rules.
+Module 4 — Cold Chain Monitor
+For temperature-sensitive products, this module tracks the thermal profile of the shipment across all nodes — origin cold store, port handling, vessel or aircraft hold, transshipment hub, destination port, and last-mile delivery. It integrates with GDP-certification databases to flag any handling point that lacks the required certifications. In the hackathon demo, simulated IoT data is used to demonstrate real-time excursion detection and automated alert generation to all parties.
+Module 5 — Regulatory Radar
+A continuous monitoring service that scans regulatory publications, gazette notifications, WHO circulars, and FDA import alerts for changes that affect the exporter's active product catalogue. When a change is detected, the engine assesses its impact against active and upcoming shipments and generates a prioritised alert with recommended action. This converts reactive compliance into proactive compliance.
+Module 6 — Stakeholder Coordination Hub
+A shared workspace where the exporter, CHA, freight forwarder, and buyer all operate on the same document set, with version control, approval workflows, and an AI reconciliation layer that flags inconsistencies between documents before they reach customs. Letter of Credit discrepancy detection is built in — the engine compares the LC terms against the draft documents and highlights any clause mismatches that would cause a bank rejection.
+6. Feature Requirements
+Features are prioritised as P0 (hackathon MVP), P1 (post-hackathon v1), and P2 (scale features).
+Feature
+Description
+AI Role
+Priority
+Box Manifest Engine
+Parse batch record, generate ingredient-level packing list per destination country
+Extract entities, map to regulatory substance lists, generate compliant output
+P0
+Compliance Dashboard
+Traffic-light check of drug scheduling, banned substances, import permits per shipment
+Validate product-country rules, generate remediation guidance
+P0
+Route Scoring
+Score 3+ routes on time, cost, cold chain capability, regulatory risk
+Multi-dimensional constraint-aware route ranking
+P0
+Disruption Detection
+Monitor active shipments for transit anomalies; alert within 15 minutes of detection
+Anomaly detection on live transit feeds; auto-generate rerouting options
+P0
+Demo Scenario Engine
+Pre-built India-EU pharma disruption scenario for hackathon demo
+Simulated live data feed with triggered disruption event
+P0
+Document Generator
+Auto-generate shipping bill, invoice, CoA, MSDS, BL draft from shipment data
+Template-fill with validation, country-specific formatting
+P1
+Cold Chain Monitor
+Real-time temperature tracking across all shipment nodes
+Excursion prediction using rate-of-change analysis
+P1
+Regulatory Radar
+Monitor 50+ country regulatory feeds, map changes to active shipments
+NLP classification of regulatory publications, impact scoring
+P1
+Stakeholder Hub
+Shared document workspace with version control and approval flows
+LC discrepancy detection against draft documents
+P1
+ERP Integration
+API connectors for SAP, Oracle, Tally export data
+Automated data ingestion, no manual entry
+P2
+Predictive Analytics
+Delay probability scoring, seasonal capacity forecasting
+ML on historical shipment + disruption data
+P2
+Multi-sector Expansion
+Extend compliance rules to hazardous chemicals, medical devices
+Sector-specific constraint layer configuration
+P2
+7. Hackathon Demo Flow
+The demo is structured as a single end-to-end scenario that demonstrates all P0 features in under 8 minutes.
+Scenario: India to EU — Antibiotic shipment hit by Suez Canal congestion
+Product
+Amoxicillin-Clavulanate 625mg Tablets — cold-stored, 2-8 degrees Celsius required
+Origin
+Ahmedabad, India — Nhava Sheva (JNPT) port
+Destination
+Rotterdam, Netherlands — EU GDP-certified cold chain
+Disruption trigger
+Simulated Suez Canal congestion alert — adds 9-day delay to primary route
+Regulatory constraint
+EU Falsified Medicines Directive serialisation + Dutch import drug license requirement
+Step 1: Shipment creation and manifest generation (90 seconds)
+The demo operator uploads a batch manufacturing record PDF. The Manifest Engine extracts the APIs (Amoxicillin trihydrate, Clavulanate potassium), excipients (microcrystalline cellulose, magnesium stearate), and generates an EU-compliant ingredient-level packing list with EC substance identifiers and EMVS serialisation barcodes. The original packing list — which listed only the product name — is shown alongside for contrast.
+Step 2: Compliance check (60 seconds)
+The Compliance Checker runs against the Netherlands destination. It confirms: no scheduling restriction, Dutch import drug license is required from the buyer (pre-uploaded), EU FMD serialisation is satisfied by the manifest output, temperature labelling meets GDP cold chain labelling requirements. All checks green.
+Step 3: Primary route and disruption event (90 seconds)
+The Route Engine scores the primary route: Nhava Sheva — Suez Canal — Rotterdam, 22 days, USD 2,400 per container, GDP-certified cold chain throughout. At T+2 minutes into the demo, the disruption trigger fires: simulated AIS vessel data shows primary vessel diverted, Suez congestion adds 9 days. The dashboard shows the alert and immediately presents three rerouting options.
+Step 4: Constraint-aware rerouting (90 seconds)
+Route A: Cape of Good Hope diversion — same vessel, 31 days total, cold chain intact, +USD 800 cost, no documentation change required. Route B: Air freight via Dubai — 4 days, GDP-certified cold cargo, USD 18,000, generates updated air waybill. Route C: Multimodal via Colombo — 28 days, partial cold chain gap flagged at Colombo transshipment (non-GDP hub), regulatory risk score elevated. The system recommends Route A as optimal — cold chain maintained, documentation unchanged, cost delta acceptable. One-click generates the updated ETA notification for the buyer and the CHA.
+Step 5: Impact summary (60 seconds)
+The dashboard shows what PharmRoute prevented: a substance-declaration customs rejection at Rotterdam (caught by the manifest engine), a cold chain integrity failure at a non-GDP transshipment hub (caught by the route constraint layer), and a 9-day shipment delay with no buyer notification (resolved by automated rerouting). Estimated value protected: INR 85 lakh for this single shipment.
+8. Technical Architecture
+8.1 AI Core
+Google Gemini 1.5 Pro — long-context document parsing (batch records, regulatory PDFs), multi-step reasoning for compliance validation: Primary model
+Gemini text-embedding-004 — semantic search across regulatory knowledge base: Embeddings
+Function calling / JSON mode for deterministic document generation and route scoring outputs: Structured output
+Google Search grounding for live regulatory change detection: Grounding
+8.2 Data Infrastructure
+AIS vessel tracking API, FlightAware cargo API, port congestion indices (simulated for hackathon): Transit data
+Custom-built knowledge base: WHO essential medicines, FDA Orange Book, EU EPAR, CDSCO approved drug list, destination-country scheduling tables: Regulatory database
+UN Comtrade API, World Customs Organization database: HS code + tariff
+GDP-certified facility registry for 80+ key logistics hubs: Cold chain nodes
+Pre-built weighted graph of sea lanes, air routes, and intermodal connections with regulatory and cold-chain edge weights: Route graph
+8.3 Stack
+Python (FastAPI) — AI orchestration, route engine, compliance rules: Backend
+React + TypeScript — shipment dashboard, route visualisation, document workspace: Frontend
+Google Maps Platform — route visualisation, port and facility mapping: Maps
+PostgreSQL (shipment data) + Pinecone (regulatory vector store): Database
+Google Cloud Run — serverless, auto-scaling: Hosting
+9. Milestones
+Phase
+Timeline
+Deliverable
+Success Metric
+Week 1
+Days 1–7
+Regulatory knowledge base, manifest engine, compliance checker (India-EU, India-US)
+Manifest engine catches 100% of test substance mismatches
+Week 2
+Days 8–14
+Route scoring engine, disruption detection, demo scenario build
+Route engine produces correct recommendation in <2 min for Suez demo
+Week 3
+Days 15–21
+Stakeholder hub, cold chain monitor, full demo integration, UI polish
+End-to-end demo runs clean in under 8 minutes
+Hackathon
+Demo Day
+Live demo with judges, product pitch, Q&A
+Demonstrate 3 prevented failure modes with quantified impact
+10. Success Metrics
+10.1 Hackathon Evaluation Criteria
+Multi-modal AI (document parsing, live data, route optimisation, NLP monitoring) on a unified constraint layer — not a single-API demo: Technical complexity
+Quantified prevented losses per shipment; India pharma export market size is USD 27 billion — even 0.5% customs rejection improvement is INR 1,000 crore of protected value: Real-world impact
+Architecture explicitly designed for other regulated-goods sectors without re-engineering the core: Scalability story
+Gemini 1.5 Pro, text-embedding-004, Search grounding, Google Maps Platform, Google Cloud Run — all core to the solution, not decorative: Google technology depth
+10.2 Post-Hackathon Product Metrics
+Target: reduce from industry average of 3.2% to below 0.5% for platform users: Customs rejection rate
+Target: reduce from 4-6 hours per shipment to under 30 minutes: Document preparation time
+Target: rerouting recommendation generated within 15 minutes of anomaly detection: Disruption response time
+Target: minimum 7 days advance notice before a rule change affects an active shipment: Regulatory alert lead time
+11. Risks and Mitigations
+Regulatory DB accuracy
+Mitigation: seed with authoritative primary sources (WHO, FDA, CDSCO official publications); flag any low-confidence output for human review; do not auto-file documents without user approval
+Hallucination in substance mapping
+Mitigation: substance identification uses exact-match lookup against chemical identifier databases (CAS numbers, INN names), not generative inference; LLM used only for document structuring and explanation, not for regulatory fact generation
+Live data availability for demo
+Mitigation: all live data feeds are mirrored with simulated fallbacks; disruption scenario is pre-scripted and triggered manually to ensure reliable demo execution
+Cold chain node database coverage
+Mitigation: start with top 50 global pharma logistics hubs (covers 90%+ of Indian pharma export volume); flag unknown nodes as 'unverified — verify before booking'
+Scope creep
+Mitigation: strict P0/P1/P2 prioritisation; hackathon build touches only P0 features; all other features are stubs with placeholder UI
+12. Appendix — Key Definitions
+API (pharma)
+Active Pharmaceutical Ingredient — the biologically active component in a drug product
+CHA
+Customs House Agent — licensed professional who files export-import documentation with Indian customs
+CoA
+Certificate of Analysis — document certifying that a batch meets its quality specifications
+GDP
+Good Distribution Practice — EU/WHO standard for pharmaceutical supply chain handling and storage
+HS Code
+Harmonised System code — international standardised numerical code for traded products, used by customs worldwide
+Incoterms
+International Commercial Terms — standardised trade terms defining responsibility transfer between buyer and seller
+LC
+Letter of Credit — bank instrument guaranteeing payment to exporter upon presentation of compliant documents
+MSDS
+Material Safety Data Sheet — document describing hazardous properties and handling requirements of a substance
+Reefer
+Refrigerated container — temperature-controlled cargo container for cold chain shipments
+Serialisation
+Unique identification of each individual drug package with a scannable code, required by EU FMD and several other markets
+PharmRoute  |  Built for Google Hackathon 2025  |  Smart Supply Chains
+Protecting every shipment. From batch record to import clearance.
